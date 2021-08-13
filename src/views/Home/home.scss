@@ -1,0 +1,50 @@
+@import "/src/assets/style/base.scss";
+
+.home {
+    padding: 40px 0;
+    background-color: $primary;
+    min-height: 100vh;
+    .product-filter {
+        .select {
+        appearance: none;
+        border: 0;
+        outline: 0;
+        font: inherit;
+        width: 20em;
+        height: 3em;
+        padding: 0 4em 0 1em;
+        background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
+            no-repeat right 0.8em center / 1.4em,
+            $primary;
+        color: $white;
+        border-radius: 0.25em;
+        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        option {
+            color: $black;
+            background-color: $white;
+        }
+        /* Remove focus outline */
+        &:focus {
+            outline: none;
+        }
+        /* Remove IE arrow */
+        &::-ms-expand {
+            display: none;
+        }
+        }
+    }
+    .product-list {
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+        background-color: $white;
+        border-radius: 6px;
+        padding: 20px;
+        margin: 30px 0 0;
+    }
+    .total {
+        padding: 8px 25px;
+        font-size: 22px;
+        display: block;
+        text-align: right;
+    }
+}
