@@ -5,16 +5,13 @@ import "./home.scss"
 function Home() {
     
     const [ productList, setProductList ] = React.useState([])
+    const [ searchProductList, setSearchProductList ] = React.useState([])
     const [ total, setTotal ] = React.useState(0)
 
     useEffect(() => {
         fetch("https://my-json-server.typicode.com/benirvingplt/products/products")
         .then( res => res.json())
-        // .then( res => setProductList(res))
-        .then( res => {
-            setProductList(res)
-            console.log("res",res)
-        })
+        .then( res => setProductList(res))
     }, [])
 
     const handelTotal = (action,id) => {
@@ -35,7 +32,7 @@ function Home() {
     const onChange = (e) => {
         console.log(e.target.value)
         let updateProductList = productList.filter( product => product.colour == e.target.value )
-        setProductList(updateProductList)
+        setSearchProductList(updateProductList)
     }
 
     return (
@@ -43,7 +40,7 @@ function Home() {
         <div className="home">
             <div className="container">
                 <div className="product-filter">
-                    <select onChange={(e) => onChange(e)} class="select">
+                    <select onChange={(e) => onChange(e)} className="select">
                         <option value="">Select Color</option>
                         <option value="Red">Red</option>
                         <option value="Black">Black</option>
@@ -51,7 +48,11 @@ function Home() {
                     </select>
                 </div>
                 <div className="product-list">
-                    {productList && productList.map( product => <ProductItem product={product} handelTotal={handelTotal} handelRemove={handelRemove} /> ) }
+                    {searchProductList.length > 0 ? 
+                        searchProductList.map( product => <ProductItem product={product} handelTotal={handelTotal} handelRemove={handelRemove} /> )
+                        :
+                        productList.map( product => <ProductItem product={product} handelTotal={handelTotal} handelRemove={handelRemove} /> 
+                    )}
                     <span className="total">Total: <strong>{parseFloat(total).toFixed(2)}</strong></span>
                 </div>
             </div>
